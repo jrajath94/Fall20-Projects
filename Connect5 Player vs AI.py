@@ -313,27 +313,31 @@ def simulator(number):
 
         while True:
             if player_turn == 1:
-
+                board_printer(game_board)
+                player_request0 = input(
+                    "Player {} Please enter the Column Number you wish to have your coin \n \n ".format(player_turn))
                 player_turn = 2
                 possible_columns = fetch_possible_columns(game_board)
                 if possible_columns == []:
                     print("\n\n****************************************************")
                     print("********* GAME ENDS IN A DRAW **********************")
                     print("****************************************************")
-                    draw += 1
                     break
+                while True:
+                    if int(player_request0) in possible_columns:
+                        print("You've entered a valid column, inserting the coin to the column {}".format(
+                            player_request0))
+                        game_board = deepcopy(insert_element(game_board, '1', int(player_request0)))
+                        break
+                    else:
+                        player_request0 = print("Please enter a valid column , the valid columns are - ",
+                                                possible_columns)
 
-                move = random.choice(possible_columns)
-                print("AI 1 has chosen the column -  ", int(move))
-                game_board = deepcopy(insert_element(game_board, '1', int(move)))
-
-            if (check_victory(game_board, '1')):
-                board_printer(game_board)
-                print("\n\n****************************************************")
-                print("Player 1 has won the game, Thank you for Playing :) ")
-                print("****************************************************")
-                player_1_victory +=1
-                break
+                if (check_victory(game_board, '1')):
+                    print("\n\n****************************************************")
+                    print("Player 1 has won the game, Thank you for Playing :) ")
+                    print("****************************************************")
+                    break
 
             if player_turn == 2:
                 # player_request1 = input("Player {} Please enter the Column Number you wish to have your coin \n \n ".format(player_turn))
@@ -365,4 +369,4 @@ def simulator(number):
     print(" Player 2 victory - ",player_2_victory , " Percentage = ", (player_2_victory/(player_1_victory + player_2_victory+draw))*100)
     print("Draws - ",draw)
 
-simulator(1000)
+simulator(1)

@@ -315,4 +315,4 @@ def simulator(number):
     print(" Player 2 victory - ",player_2_victory , " Percentage = ", (player_2_victory/(player_1_victory + player_2_victory+draw))*100)
     print("Draws - ",draw)
 
-simulator(10)
+simulator(1000)
